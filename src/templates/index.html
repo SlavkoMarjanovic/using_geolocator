@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{%load leaflet_tags%}
+<head>
+    <meta charset="UTF-8">
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <title>Our home</title>
+    <style type="text/css">
+        #gis {width: 80%; height:700px}
+    </style>
+    <script type="text/javascript" src="{% static 'dist/leaflet.ajax.js' %}"></script>
+</head>
+<body>
+<h2>Pozzz</h2>
+<br>
+<script type="text/javascript">
+    function our_layers(map.options){
+        var datasets = new L.GeoJSON.AJAX("{% url "county" %}",{
+        });
+        datasets.addTo(map);
+    }
+</script>
+{% leaflet_map "gis" callback="window.our_layers" %}
+</body>
+</html>

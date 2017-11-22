@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'analytics',
+    'leaflet',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'geo2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,3 +126,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = {
+    os.path.join(BASE_DIR, 'static'),
+}
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER':(44.78, 20.44),
+    'DEFAULT_ZOOM': 7,
+    'MAX_ZOOM':20,
+    'MIN_ZOOM':2,
+    'SCALE':'both',
+    'ATTRIBUTION_PREFIX':'inspired by Sly',
+}
