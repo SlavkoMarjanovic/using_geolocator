@@ -11,15 +11,15 @@
         #gis {width: 80%; height:700px}
     </style>
     <link type="text/css" rel="stylesheet" href="routing/leaflet-routing-machine.css">
-
+    <link type="text/css" rel="stylesheet" href="dist/leaflet.groupedlayercontrol.min.css">
     <script type="text/javascript" src="{% static 'dist/leaflet.ajax.js' %}"></script>
     <script type="text/javascript" src="{% static 'dist/leaflet.groupedlayercontrol.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'routing/leaflet-routing-machine.js' %}"></script>
 </head>
 <body>
 <h2>Pozzz</h2>
 <br>
-    <link type="text/css" rel="stylesheet" href="dist/leaflet.groupedlayercontrol.min.css">
-    <script type="text/javascript" src="{% static 'routing/leaflet-routing-machine.min.js' %}"></script>
+
 <script type="text/javascript">
 
     function our_layers(map,options){
@@ -42,17 +42,17 @@
         var groupedOverlays = {
           "Layers": {
             "county": datasets,
-            "incidecnces": points
+            "incidences": points
           }
           };
-          L.Routing.control({
+        L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
+        L.Routing.control({
           waypoints: [
             L.latLng(44.78, 20.44),
             L.latLng(43.58, 19.52)
           ]
         }).addTo(map);
 
-        L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
     }
 </script>
 {% leaflet_map "gis" callback="window.our_layers" %}
